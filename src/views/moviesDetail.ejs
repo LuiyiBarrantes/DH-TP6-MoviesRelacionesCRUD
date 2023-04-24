@@ -16,7 +16,7 @@
     <p>RATING: <%= movie.rating %> </p>
     <p>AWARDS: <%= movie.awards %> </p>
     <p>LENGTH: <%= movie.length + ' min'%> </p>
-    <p>RELEASE DATE: <%= movie.release_date %> </p>
+    <p>RELEASE DATE: <%= movie.release_date.toISOString().slice(0, 10) %> </p>
     <p>GENRE: <%= movie.genero ? movie.genero.name : "Sin genero agregado" %> </p>
     <p>ACTORS: <% if (movie.actores.length!=0) { %>
         <% movie.actores.forEach(actor => { %>
