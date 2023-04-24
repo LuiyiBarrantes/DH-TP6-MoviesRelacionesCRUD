@@ -22,4 +22,4 @@ app.use('/', indexRouter);
 app.use(moviesRoutes);
 app.use(genresRoutes);
 
-app.listen('3001', () => console.log('Servidor corriendo en el puerto 3001'));
+app.listen('3001', () => console.log('Servidor corriendo en http://localhost:3001'));
