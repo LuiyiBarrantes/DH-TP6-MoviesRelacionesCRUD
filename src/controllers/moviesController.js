@@ -89,23 +89,26 @@ const moviesController = {
 
         Promise.all([movie,allGenres])
             .then(([movie,allGenres]) => {
-                res.send(movie.release_date)
-                //res.send([movie,allGenres])
-                //return res.render('moviesEdit', {Movie:movie,                allGenres})
+                // res.send(movie.release_date.toISOString())
+                //.split("T")[0] res.send([movie,allGenres])
+                 return res.render('moviesEdit', {Movie:movie,                allGenres})
             })
             .catch(error=>console.log(error));;
     },
     update: function (req,res) {
+        const {id}=req.params
+        //return res.send(req.body)
         Movies.update({
             ...req.body,
             title : req.body.title.trim()
         },{
             where: {
-            id : req.params.id
+            id : id
         }})
         .then(result=>{
             console.log(result);
-            return res.redirect('/movies/detail/'+req.params.id)
+            
+            return res.redirect('/movies/detail/'+id)
         })
         .catch(error=>console.log(error))
     },
