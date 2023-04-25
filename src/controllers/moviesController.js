@@ -61,7 +61,17 @@ const moviesController = {
     //Aqui dispongo las rutas para trabajar con el CRUD
     add: function (req, res) {
         //res.send(db.Genre)
-        db.Genre.findAll()
+        const allGenres = db.Genre.findAll()
+        const allActors = db.Actor.findAll()
+        
+        Promise.all([allGenres,allActors])
+            .then(([allGenres,allActors]) => {
+                // res.send(movie.release_date.toISOString())
+                //.split("T")[0] res.send([movie,allGenres])
+                 return res.render('moviesAdd', {                    
+                    allGenres,
+                    allActors})
+            })
         .then(allGenres=>
             res.render('moviesAdd',{
             allGenres
@@ -83,15 +93,23 @@ const moviesController = {
         .catch(error=>console.log(error));
     },
     edit: function(req,res) {
-        const movie = db.Movie.findByPk(req.params.id)
+        const movie = db.Movie.findByPk(req.params.id,{
+            include:["genero","actores"]
+        })
 
         const allGenres = db.Genre.findAll()
 
-        Promise.all([movie,allGenres])
-            .then(([movie,allGenres]) => {
+        const allActors = db.Actor.findAll()
+        
+        Promise.all([movie,allGenres,allActors])
+            .then(([movie,allGenres,allActors]) => {
+                // return res.send(movie)
                 // res.send(movie.release_date.toISOString())
                 //.split("T")[0] res.send([movie,allGenres])
-                 return res.render('moviesEdit', {Movie:movie,                allGenres})
+                 return res.render('moviesEdit', {
+                    Movie:movie,
+                    allGenres,
+                    allActors})
             })
             .catch(error=>console.log(error));
     },
