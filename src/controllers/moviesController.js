@@ -93,7 +93,7 @@ const moviesController = {
                 //.split("T")[0] res.send([movie,allGenres])
                  return res.render('moviesEdit', {Movie:movie,                allGenres})
             })
-            .catch(error=>console.log(error));;
+            .catch(error=>console.log(error));
     },
     update: function (req,res) {
         const {id}=req.params
@@ -124,10 +124,17 @@ const moviesController = {
                 // .split("T")[0] res.send([movie,allGenres])
                  return res.render('moviesDelete', {Movie} /* {Movie:movie,                allGenres} */)
             })
-            .catch(error=>console.log(error));;
+            .catch(error=>console.log(error));
     },
     destroy: function (req,res) {
-
+        const {id}= req.params
+        db.Movie.destroy({
+            where:{id:id}
+        })
+        .then(()=>{
+            return res.redirect('/movies')
+        })
+        .catch(error=>console.log(error));
     }
 }
 
