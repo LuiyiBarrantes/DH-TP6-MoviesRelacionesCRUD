@@ -6,8 +6,12 @@ module.exports = (sequelize, dataTypes) => {
             primaryKey: true,
             autoIncrement: true
         },
-        actor_id : {type: dataTypes.BIGINT(10)},
-        movie_id : {type: dataTypes.BIGINT(10)}
+        actor_id : {
+            type: dataTypes.BIGINT(10),
+            onDelete: 'CASCADE',},
+        movie_id : {
+            type: dataTypes.BIGINT(10),
+            onDelete: 'CASCADE',}
     };
     let config = {
         timestamps: true,
