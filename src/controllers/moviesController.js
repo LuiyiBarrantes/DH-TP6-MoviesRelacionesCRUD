@@ -113,7 +113,18 @@ const moviesController = {
         .catch(error=>console.log(error))
     },
     delete: function (req,res) {
+        const {id} = req.params
+        /* const movie =  */db.Movie.findByPk(id)
 
+        /* const allGenres = db.Genre.findAll()
+
+        Promise.all([movie,allGenres]) */
+            .then((/* [movie,allGenres] */Movie) => { 
+                // return res.send(Movie)
+                // .split("T")[0] res.send([movie,allGenres])
+                 return res.render('moviesDelete', {Movie} /* {Movie:movie,                allGenres} */)
+            })
+            .catch(error=>console.log(error));;
     },
     destroy: function (req,res) {
 
