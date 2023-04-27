@@ -14,10 +14,12 @@ module.exports = (sequelize, dataTypes) => {
             onDelete: 'CASCADE',}
     };
     let config = {
+        tablName : 'actor_movie',
         timestamps: true,
         createdAt: 'created_at',
         updatedAt: 'updated_at',
-        deletedAt: false
+        deletedAt: false,
+        freezeTableName: true
     }
     const Actor_Movie = sequelize.define(alias, cols, config); 
 
