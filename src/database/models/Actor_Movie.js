@@ -19,6 +19,7 @@ module.exports = (sequelize, dataTypes) => {
         createdAt: 'created_at',
         updatedAt: 'updated_at',
         deletedAt: false,
+        //sequelize toma el nombre de la talbename para insertar y borrar
         freezeTableName: true
     }
     const Actor_Movie = sequelize.define(alias, cols, config); 

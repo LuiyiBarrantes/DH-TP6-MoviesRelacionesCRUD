@@ -37,7 +37,7 @@ module.exports = (sequelize, dataTypes) => {
         as: "peliculas",
         through : "actor_movie",
         foreignKey : "actor_id",
-        other : "movie_id"
+        otherKey : "movie_id"
     })}
     
 
