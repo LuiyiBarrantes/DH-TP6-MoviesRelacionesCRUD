@@ -19,17 +19,17 @@
     <p>RELEASE DATE: <%= movie.release_date.toISOString().slice(0, 10) %> </p>
     <p>GENRE: <%= movie.genero ? movie.genero.name : "Sin genero agregado" %> </p>
     <p>ACTORS: <% if (movie.actores.length!=0) { %>
-        <% movie.actores.forEach(actor => { %>
+<ul><% movie.actores.forEach(actor => { %>
          <li><%=actor.first_name+" "+actor.last_name %></li>
        
         <% }) %>
         <% } else { %>
          Sin actores agregados
        <% } %> 
-    
+    </ul>
     </p>
     <br>   
-    <section>
+    <section class="botonera">
         <!--Aquí debe colocar los botones de Modificar - Borrar y Listado de Películas-->
         <a href="/movies/edit/<%= movie.id %>" class="botonModificar">Modificar</a>
         <a href="/movies/delete/<%= movie.id %>" class="botonBorrar">Borrar</a>
