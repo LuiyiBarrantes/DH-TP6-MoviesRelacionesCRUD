@@ -65,11 +65,13 @@
                 <select name="actors_id" id="" multiple style="height: 150px;"><!-- required -->
                     <option value="" disabled selected>- select Actor - </option>
                     <% allActors.forEach(Actor=> { %>
-                        <option value="<%= Actor.id %>" <% if (Array.isArray(locals.old.actors_id) && locals.old.actors_id.includes(Actor.id.toString())) { %>
+                        <option value="<%= Actor.id %>" <% if (locals.old) { %>
+                         <% if (Array.isArray(locals.old.actors_id) && locals.old.actors_id.includes(Actor.id.toString())) { %>
                             <%= 'selected' %>
                          <% } else if (!Array.isArray(locals.old.actors_id) && locals.old.actors_id == Actor.id) { %>
                             <%= 'selected' %>
-                        <% } %> >
+                        <% } %>
+                        <% } %>  >
                             <%= Actor.first_name+' '+Actor.last_name %></option>
                     <% }); %>
                 </select>

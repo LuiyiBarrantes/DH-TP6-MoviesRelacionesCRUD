@@ -191,9 +191,14 @@ const moviesController = {
             .catch(error => console.log(error));
     },
     'update': function (req, res) {
+        const errors = validationResult(req);
         const { id } = req.params
         const { title, rating, awards, release_date, length, genre_id, actors_id } = req.body;
+        
         //return res.send(req.body)
+        if (errors.isEmpty()) {
+            
+        
         db.Actor_Movie.destroy({
             where: {
                 movie_id: id
@@ -246,7 +251,38 @@ const moviesController = {
 
             })
             .catch(error => console.log(error))
-
+        } else {
+            const movie = db.Movie.findByPk(req.params.id, {
+                include: ["genero", "actores"]
+            })
+    
+            const allGenres = db.Genre.findAll({
+                order: [
+                    ['name', 'ASC']
+                ]
+            })
+    
+            const allActors = db.Actor.findAll({
+                order: [
+                    ['last_name', 'ASC']
+                ]
+            })
+    
+            Promise.all([movie, allGenres, allActors])
+                .then(([movie, allGenres, allActors]) => {
+                    // return res.send(movie)
+                    // res.send(movie.release_date.toISOString())
+                    //.split("T")[0] res.send([movie,allGenres])
+                    return res.render('moviesEdit', {
+                        Movie: movie,
+                        allGenres,
+                        allActors,
+                        errors: errors.mapped(),
+                        old: req.body,
+                    })
+                })
+                .catch(error => console.log(error));
+        }
     },
     'delete': function (req, res) {
         const { id } = req.params

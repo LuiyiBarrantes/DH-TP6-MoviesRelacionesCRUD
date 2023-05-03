@@ -11,7 +11,7 @@ router.get('/movies/detail/:id', moviesController.detail);
 router.get('/movies/add', moviesController.add);
 router.post('/movies/create', movieValidator, moviesController.create);
 router.get('/movies/edit/:id', moviesController.edit);
-router.post('/movies/update/:id', moviesController.update);
+router.post('/movies/update/:id', movieValidator, moviesController.update);
 router.get('/movies/delete/:id', moviesController.delete);
 router.post('/movies/delete/:id', moviesController.destroy);
 
