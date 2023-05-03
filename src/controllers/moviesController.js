@@ -53,7 +53,7 @@ const moviesController = {
             })
             .catch(error => console.log(error));;
     },
-    //Aqui dispongo las rutas para trabajar con el CRUD
+
     'add': function (req, res) {
         //res.send(db.Genre)
         const allGenres = db.Genre.findAll({
@@ -130,7 +130,7 @@ const moviesController = {
                 return res.redirect('/movies')
             }).catch(error => console.log(error));
 
-        } else { 
+        } else {
             // return res.send( {old:req.body,  errors:errors.mapped()}/**/)
             const allGenres = db.Genre.findAll({
                 order: [
@@ -181,7 +181,6 @@ const moviesController = {
             .then(([movie, allGenres, allActors]) => {
                 // return res.send(movie)
                 // res.send(movie.release_date.toISOString())
-                //.split("T")[0] res.send([movie,allGenres])
                 return res.render('moviesEdit', {
                     Movie: movie,
                     allGenres,
@@ -194,38 +193,50 @@ const moviesController = {
         const errors = validationResult(req);
         const { id } = req.params
         const { title, rating, awards, release_date, length, genre_id, actors_id } = req.body;
-        
+
         //return res.send(req.body)
         if (errors.isEmpty()) {
-            
-        
-        db.Actor_Movie.destroy({
-            where: {
-                movie_id: id
-            }
-        })
-            .then(() => {
-                return db.Movie.update({
-                    title: title.trim(),
-                    rating: rating,
-                    awards: awards,
-                    release_date: release_date,
-                    length: length,
-                    genre_id: genre_id
-                }, {
-                    where: {
-                        id: id
-                    }
-                })
+
+
+            db.Actor_Movie.destroy({
+                where: {
+                    movie_id: id
+                }
             })
-            .then(result => {
-                console.log(result);
-                if (actors_id) {
-                    if (Array.isArray(actors_id)) {
-                        actors_id.forEach(actor_id => {
+                .then(() => {
+                    return db.Movie.update({
+                        title: title.trim(),
+                        rating: rating,
+                        awards: awards,
+                        release_date: release_date,
+                        length: length,
+                        genre_id: genre_id
+                    }, {
+                        where: {
+                            id: id
+                        }
+                    })
+                })
+                .then(result => {
+                    console.log(result);
+                    if (actors_id) {
+                        if (Array.isArray(actors_id)) {
+                            actors_id.forEach(actor_id => {
+                                db.Actor.findOne({
+                                    where: {
+                                        id: actor_id
+                                    }
+                                }).then(actor => {
+                                    db.Actor_Movie.create({
+                                        actor_id: actor.id,
+                                        movie_id: id
+                                    });
+                                });
+                            });
+                        } else {
                             db.Actor.findOne({
                                 where: {
-                                    id: actor_id
+                                    id: actors_id
                                 }
                             }).then(actor => {
                                 db.Actor_Movie.create({
@@ -233,46 +244,32 @@ const moviesController = {
                                     movie_id: id
                                 });
                             });
-                        });
-                    } else {
-                        db.Actor.findOne({
-                            where: {
-                                id: actors_id
-                            }
-                        }).then(actor => {
-                            db.Actor_Movie.create({
-                                actor_id: actor.id,
-                                movie_id: id
-                            });
-                        });
+                        }
                     }
-                }
-                return res.redirect('/movies' /* /detail/' + id */)
+                    return res.redirect('/movies' )
 
-            })
-            .catch(error => console.log(error))
+                })
+                .catch(error => console.log(error))
         } else {
             const movie = db.Movie.findByPk(req.params.id, {
                 include: ["genero", "actores"]
             })
-    
+
             const allGenres = db.Genre.findAll({
                 order: [
                     ['name', 'ASC']
                 ]
             })
-    
+
             const allActors = db.Actor.findAll({
                 order: [
                     ['last_name', 'ASC']
                 ]
             })
-    
+
             Promise.all([movie, allGenres, allActors])
                 .then(([movie, allGenres, allActors]) => {
-                    // return res.send(movie)
-                    // res.send(movie.release_date.toISOString())
-                    //.split("T")[0] res.send([movie,allGenres])
+                    
                     return res.render('moviesEdit', {
                         Movie: movie,
                         allGenres,
@@ -286,15 +283,11 @@ const moviesController = {
     },
     'delete': function (req, res) {
         const { id } = req.params
-        /* const movie =  */db.Movie.findByPk(id)
+        db.Movie.findByPk(id)
 
-            /* const allGenres = db.Genre.findAll()
-     
-            Promise.all([movie,allGenres]) */
-            .then((/* [movie,allGenres] */Movie) => {
-                // return res.send(Movie)
-                // .split("T")[0] res.send([movie,allGenres])
-                return res.render('moviesDelete', { Movie } /* {Movie:movie,                allGenres} */)
+            .then((Movie) => {
+
+                return res.render('moviesDelete', { Movie })
             })
             .catch(error => console.log(error));
     },
