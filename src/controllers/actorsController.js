@@ -26,7 +26,7 @@ const actorsController = {
             .catch(error => console.log(error));;
     },
     'recomended': (req, res) => {
-        db.Movie.findAll({
+        db.Actor.findAll({
             where: {
                 rating: { [db.Sequelize.Op.gte]: 8 }
             },
@@ -34,30 +34,26 @@ const actorsController = {
                 ['rating', 'DESC']
             ]
         })
-            .then(movies => {
-                res.render('recommendedMovies.ejs', { movies });
+            .then(actors => {
+                res.render('recommendedActors.ejs', { actors });
             })
             .catch(error => console.log(error));;
     },
     //Aqui dispongo las rutas para trabajar con el CRUD
     'add': function (req, res) {
         //res.send(db.Genre)
-        const allGenres = db.Genre.findAll()
-        const allActors = db.Actor.findAll()
-
-        Promise.all([allGenres, allActors])
-            .then(([allGenres, allActors]) => {
+        db.Movie.findAll({
+            order: [
+                ['title', 'ASC']
+            ]
+        })        
+            .then((movies) => {
                 // res.send(movie.release_date.toISOString())
                 //.split("T")[0] res.send([movie,allGenres])
-                return res.render('moviesAdd', {
-                    allGenres,
-                    allActors
+                return res.render('actorsAdd', {
+                    movies
                 })
             })
-            .then(allGenres =>
-                res.render('moviesAdd', {
-                    allGenres
-                }))
             .catch(error => console.log(error));
     },
     'create': function (req, res) {
