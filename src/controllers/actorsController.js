@@ -16,24 +16,12 @@ const actorsController = {
             .catch(error => console.log(error));
     },
     'detail': (req, res) => {
-        db.Movie.findByPk(req.params.id, {
-            include: ["genero", "actores"]
+        db.Actor.findByPk(req.params.id, {
+            include: ["peliculas","favorite_movie"]
         })
-            .then(movie => {
-                //res.send(movie)
-                res.render('moviesDetail.ejs', { movie });
-            })
-            .catch(error => console.log(error));;
-    },
-    'new': (req, res) => {
-        db.Movie.findAll({
-            order: [
-                ['release_date', 'DESC']
-            ],
-            limit: 5
-        })
-            .then(movies => {
-                res.render('newestMovies', { movies });
+            .then(actor => {
+               // res.send(actor)
+                res.render('actorsDetail.ejs', { actor });
             })
             .catch(error => console.log(error));;
     },
