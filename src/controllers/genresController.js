@@ -6,16 +6,16 @@ const genresController = {
     'list': (req, res) => {
         db.Genre.findAll()
             .then(genres => {
-                res.render('genresList.ejs', {genres})
+                res.render('genresList.ejs', { genres })
             })
     },
     'detail': (req, res) => {
-        db.Genre.findByPk(req.params.id,{
-            include : ["peliculas"]
+        db.Genre.findByPk(req.params.id, {
+            include: ["peliculas"]
         })
             .then(genre => {
                 //res.send(genre)
-                res.render('genresDetail.ejs', {genre});
+                res.render('genresDetail.ejs', { genre });
             });
     }
 
