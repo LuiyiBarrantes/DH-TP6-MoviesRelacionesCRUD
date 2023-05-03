@@ -20,7 +20,7 @@
     <p>GENRE: <%= movie.genero ? movie.genero.name : "Sin genero agregado" %> </p>
     <p>ACTORS: <% if (movie.actores.length!=0) { %>
 <ul><% movie.actores.forEach(actor => { %>
-         <li><%=actor.first_name+" "+actor.last_name %></li>
+         <li><a href="/actors/detail/<%= actor.id %>"><%=actor.first_name+" "+actor.last_name %></a></li>
        
         <% }) %>
         <% } else { %>

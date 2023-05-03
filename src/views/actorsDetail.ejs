@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= actor.first_name+' '+actor.last_name %> </title>
+    <link rel='stylesheet' href='/css/style.css' />
+
+</head>
+<body>
+    <figure>
+        <img src="/img/logo-DH.png" alt="Logo Digital House">
+    </figure>
+    <h1><%= actor.first_name+' '+actor.last_name %> </h1>    
+    <br>
+    <p>RATING: <%= actor.rating %> </p>
+    <!-- <p>AWARDS: <%= actor.awards %> </p> -->
+    <!-- <p>LENGTH: <%= actor.length + ' min'%> </p> -->
+    <!-- <p>RELEASE DATE: </p> -->
+    <p>Favorite Movie: <% if (actor.favorite_movie_id) { %> <a href="/movies/detail/<%= actor.favorite_movie.id %>"> <%= actor.favorite_movie.title %> </a>
+     <% } else { %>
+      No tiene pelicula favorita
+    <% } %>
+         </p>
+    <p>Movies: <% if (actor.peliculas.length!=0) { %>
+<ul><% actor.peliculas.forEach(pelicula => { %>
+         <li><a href="/movies/detail/<%= pelicula.id %>"><%=pelicula.title %></a></li>
+       
+        <% }) %>
+        <% } else { %>
+         Sin peliculas agregadas
+       <% } %> 
+    </ul>
+    </p>
+    <br>   
+    <section class="botonera">
+        <!--Aquí debe colocar los botones de Modificar - Borrar y Listado de Películas-->
+        <a href="/actors/edit/<%= actor.id %>" class="botonModificar">Modificar</a>
+        <a href="/actors/delete/<%= actor.id %>" class="botonBorrar">Borrar</a>
+        <a href="/actors" class="botonVolver">Listado de Actores</a>
+        
+    </section>
+
+</body>
+</html>
