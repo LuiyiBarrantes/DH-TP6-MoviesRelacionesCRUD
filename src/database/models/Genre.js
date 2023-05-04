@@ -34,10 +34,10 @@ module.exports = (sequelize, dataTypes) => {
 
     //Aquí debes realizar lo necesario para crear las relaciones con el modelo (Movie)
 
-    Genre.associate = models=>{
-        Genre.hasMany(models.Movie,{
+    Genre.associate = models => {
+        Genre.hasMany(models.Movie, {
             as: "peliculas",
-            foreignKey : "genre_id",
+            foreignKey: "genre_id",
         })
     }
 

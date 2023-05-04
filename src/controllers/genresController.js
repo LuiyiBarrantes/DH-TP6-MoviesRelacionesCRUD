@@ -28,29 +28,29 @@ const genresController = {
         const errors = validationResult(req);
         const { name } = req.body
         //const { count } = db.Genre.findAndCountAll()
-       /* db.Genre.findAll().then( genres => {
-            const lastRanking = genres.length
-            return res.send(lastRanking /* count )
-        }
-        )
-        */
-         if (errors.isEmpty()) {
-            db.Genre.findAll().then( genres =>{      
-            db.Genre.create({
-                ...req.body,
-                name:name.trim(),
-                ranking: genres.length + 1
-            }).then(newGenre => {
-                console.log(newGenre);
+        /* db.Genre.findAll().then( genres => {
+             const lastRanking = genres.length
+             return res.send(lastRanking /* count )
+         }
+         )
+         */
+        if (errors.isEmpty()) {
+            db.Genre.findAll().then(genres => {
+                db.Genre.create({
+                    ...req.body,
+                    name: name.trim(),
+                    ranking: genres.length + 1
+                }).then(newGenre => {
+                    console.log(newGenre);
 
-                return res.redirect('/genres')
-            })
-        }).catch(error => console.log(error));
+                    return res.redirect('/genres')
+                })
+            }).catch(error => console.log(error));
         } else {
-            return res.render('genresAdd',{
-                    errors: errors.mapped(),
-                    old: req.body,
-                }
+            return res.render('genresAdd', {
+                errors: errors.mapped(),
+                old: req.body,
+            }
             )
         }
     },
@@ -66,24 +66,24 @@ const genresController = {
             })
             .catch(error => console.log(error));
     },
-    'update': function (req,res) {
+    'update': function (req, res) {
         const errors = validationResult(req);
         const { name } = req.body
         //const { count } = db.Genre.findAndCountAll()
-       /* db.Genre.findAll().then( genres => {
-            const lastRanking = genres.length
-            return res.send(lastRanking /* count )
-        }
-        )
-        */
-         if (errors.isEmpty()) {
-                  
+        /* db.Genre.findAll().then( genres => {
+             const lastRanking = genres.length
+             return res.send(lastRanking /* count )
+         }
+         )
+         */
+        if (errors.isEmpty()) {
+
             db.Genre.update({
                 ...req.body,
-                name:name.trim(),                
-            },{
-                where:{
-                    id : req.params.id,
+                name: name.trim(),
+            }, {
+                where: {
+                    id: req.params.id,
                 }
             }).then(updatedGenre => {
                 console.log(updatedGenre);
@@ -92,28 +92,28 @@ const genresController = {
             }).catch(error => console.log(error));
         } else {
             db.Genre.findByPk(req.params.id)
-            .then(genre => {
-                // return res.send(actorToUpdate)
-                // res.send(actorToUpdate.release_date.toISOString())
-                //.split("T")[0] res.send([actorToUpdate,allMovies])
-                return res.render('genresEdit', {
-                    genre,
-                    errors: errors.mapped(),
-                    old: req.body,
+                .then(genre => {
+                    // return res.send(actorToUpdate)
+                    // res.send(actorToUpdate.release_date.toISOString())
+                    //.split("T")[0] res.send([actorToUpdate,allMovies])
+                    return res.render('genresEdit', {
+                        genre,
+                        errors: errors.mapped(),
+                        old: req.body,
+                    })
                 })
-            })
-            .catch(error => console.log(error));
+                .catch(error => console.log(error));
         }
     },
     'delete': function (req, res) {
         const { id } = req.params
         db.Genre.findByPk(id)
 
-            
+
             .then((genre) => {
                 // return res.send(Movie)
                 // .split("T")[0] res.send([movie,allGenres])
-                return res.render('genresDelete', { genre } )
+                return res.render('genresDelete', { genre })
             })
             .catch(error => console.log(error));
     },

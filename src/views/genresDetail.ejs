@@ -1,36 +1,52 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= genre.name %> </title>
+    <title>
+        <%= genre.name %>
+    </title>
     <link rel='stylesheet' href='/css/style.css' />
 
 </head>
+
 <body>
     <figure>
-        <img src="/img/logo-DH.png" alt="Logo Digital House">
-    </figure>    
-    <h1><%= genre.name %> </h1>
+        <a href="/"><img src="/img/logo-DH.png" alt="Logo Digital House"></a>
+    </figure>
+    <h1>
+        <%= genre.name %>
+    </h1>
     <br>
-    <p>NAME: <%= genre.name %> </p>
-    <p>RANKIG: <%= genre.ranking %> </p>
+    <p>NAME: <%= genre.name %>
+    </p>
+    <p>RANKIG: <%= genre.ranking %>
+    </p>
     <p>MOVIES: <% if (genre.peliculas.length!=0) { %>
-        <ul><% genre.peliculas.forEach(pelicula => { %>
-         <a href="/movies/detail/<%= pelicula.id %>"><li><%=pelicula.title %></li></a>
-       
-        <% }) %>
-        <% } else { %>
-         Sin peliculas agregadas
-       <% } %> </ul> </p>
+            <ul>
+                <% genre.peliculas.forEach(pelicula=> { %>
+                    <a href="/movies/detail/<%= pelicula.id %>">
+                        <li>
+                            <%=pelicula.title %>
+                        </li>
+                    </a>
 
-       <br>   
-       <section class="botonera">
+                    <% }) %>
+                        <% } else { %>
+                            Sin peliculas agregadas
+                            <% } %>
+            </ul>
+    </p>
+
+    <br>
+    <section class="botonera">
         <a href="/genres/edit/<%= genre.id %>" class="botonModificar">Modificar</a>
         <a href="/genres/delete/<%= genre.id %>" class="botonBorrar">Borrar</a>
-           <a href="/genres" class="botonVolver">Volver</a>
-           
-       </section>
+        <a href="/genres" class="botonVolver">Volver</a>
+
+    </section>
 
 </body>
+
 </html>

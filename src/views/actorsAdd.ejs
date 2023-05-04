@@ -17,13 +17,15 @@
     <section>
         <form action="/actors/create" method="POST" class="formulario">
             <label for="first_name">First Name </label>
-            <p><input type="text" name="first_name" id="" value="<%= locals.old && old.first_name ? old.first_name : null %>"></p>
+            <p><input type="text" name="first_name" id=""
+                    value="<%= locals.old && old.first_name ? old.first_name : null %>"></p>
             <!-- required -->
             <small style="color: red; width: 100%; background-color: aliceblue">
                 <%= locals.errors && errors.first_name ? errors.first_name.msg : null %>
             </small> <br>
             <label for="last_name">Last Name </label>
-            <p><input type="text" name="last_name" id="" value="<%= locals.old && old.last_name ? old.last_name : null %>"></p>
+            <p><input type="text" name="last_name" id=""
+                    value="<%= locals.old && old.last_name ? old.last_name : null %>"></p>
             <!-- required -->
             <small style="color: red; width: 100%; background-color: aliceblue">
                 <%= locals.errors && errors.last_name ? errors.last_name.msg : null %>
@@ -34,31 +36,32 @@
             <small style="color: red; width: 100%;background-color: aliceblue;">
                 <%= locals.errors && errors.rating ? errors.rating.msg : null %>
             </small> <br>
-            
+
             <label for="favorite_movie_id">Favorite Movie </label>
             <p>
                 <select name="favorite_movie_id" id="" style="width: 200px;"><!-- required -->
-                    <option value="" disabled selected >- select movie - </option>
+                    <option value="" disabled selected>- select movie - </option>
                     <% movies.forEach(movie=> { %>
-                        <option value="<%= movie.id %>" <%=locals.old && old.favorite_movie_id && old.favorite_movie_id==movie.id
-                            ? 'selected' :'' %>  ><%= movie.title %>
+                        <option value="<%= movie.id %>" <%=locals.old && old.favorite_movie_id &&
+                            old.favorite_movie_id==movie.id ? 'selected' :'' %> ><%= movie.title %>
                         </option>
                         <% }); %>
                 </select>
             </p>
-            <a href="/movies/add" style="background-color: rgba(0, 255, 34, 0.322); border-radius: 5px;"><small>Agregar Pelicula +</small></a><br>
+            <a href="/movies/add" style="background-color: rgba(0, 255, 34, 0.322); border-radius: 5px;"><small>Agregar
+                    Pelicula +</small></a><br>
             <!-- <small style="color: red; width: 100%;background-color: aliceblue;">
                 <%= locals.errors && errors.favorite_movie_id ? errors.favorite_movie_id.msg : null %>
             </small> <br> -->
             <br>
             <p class="botonera"> <button class="botonAgregar" type="submit">Agregar</button>
-            
+
             </p>
         </form>
         <br>
-        <a  class="botonera botonVolver centrado" href="/actors">Volver</a>
+        <a class="botonera botonVolver centrado" href="/actors">Volver</a>
     </section>
-    
+
 </body>
 
 </html>

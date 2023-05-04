@@ -5,7 +5,7 @@ module.exports = {
     "database": "movies_db",
     "host": "localhost",
     "dialect": "mysql",
-    "port" : 3306
+    "port": 3306
   },
   "test": {
     "username": "root",

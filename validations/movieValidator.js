@@ -18,7 +18,5 @@ module.exports = [
     check('genre_id')
         .notEmpty().withMessage('Debes elegir una categoría'),
     check('actors_id')
-        .notEmpty().withMessage('Debes elegir al menos un actor'),   /*
-    .isNumeric({ no_symbols: true }).withMessage('Ingresar solo numeros').bail()
-    */
+        .notEmpty().withMessage('Debes elegir al menos un actor'),
 ]

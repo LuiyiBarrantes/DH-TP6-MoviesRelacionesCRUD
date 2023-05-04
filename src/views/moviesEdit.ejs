@@ -11,69 +11,80 @@
 <body>
     <figure>
         <a href="/"><img src="/img/logo-DH.png" alt="Logo Digital House"></a>
-      </figure>
-    <h1 class="titulo">Película Editada:  <%= Movie.title %></h1>
+    </figure>
+    <h1 class="titulo">Película Editada: <%= Movie.title %>
+    </h1>
     <section class="formulario">
         <form action="/movies/update/<%= Movie.id %>" method="POST">
             <label for="title">Title </label>
-            <p><input type="text" name="title" id="" value="<%= Movie.title %>" ></p>
+            <p><input type="text" name="title" id="" value="<%= Movie.title %>"></p>
             <small style="color: red; width: 100%; background-color: aliceblue">
                 <%= locals.errors && errors.title ? errors.title.msg : null %>
             </small> <br>
             <!-- required -->
             <label for="rating">Rating </label>
-            <p><input type="number" name="rating" id="" value="<%= Movie.rating %>" ></p>
+            <p><input type="number" name="rating" id="" value="<%= Movie.rating %>"></p>
             <small style="color: red; width: 100%;background-color: aliceblue;">
                 <%= locals.errors && errors.rating ? errors.rating.msg : null %>
             </small> <br>
             <!-- required -->
             <label for="awards">Awards </label>
-            <p><input type="number" name="awards" id="" value="<%= Movie.awards %>" ></p>
+            <p><input type="number" name="awards" id="" value="<%= Movie.awards %>"></p>
             <small style="color: red; width: 100%;background-color: aliceblue;">
                 <%= locals.errors && errors.awards ? errors.awards.msg : null %>
             </small> <br>
             <!-- required -->
             <label for="release_date">Release date </label>
-            <p><input type="date" name="release_date" id="" value="<%= Movie.release_date.toISOString().slice(0, 10)   %>" <%# .toISOString().split("T")[0] %> ></p>
+            <p><input type="date" name="release_date" id=""
+                    value="<%= Movie.release_date.toISOString().slice(0, 10)   %>" <%# .toISOString().split("T")[0] %> >
+            </p>
             <small style="color: red; width: 100%;background-color: aliceblue;">
                 <%= locals.errors && errors.release_date ? errors.release_date.msg : null %>
             </small> <br>
-                <!-- required -->
+            <!-- required -->
             <label for="length">Length </label>
-            <p><input type="number" name="length" id="" value="<%= Movie.length %>" ></p>
+            <p><input type="number" name="length" id="" value="<%= Movie.length %>"></p>
             <small style="color: red; width: 100%;background-color: aliceblue;">
                 <%= locals.errors && errors.length ? errors.length.msg : null %>
             </small> <br>
             <!-- required -->
             <label for="genre_id">Genre </label>
             <p>
-                <select name="genre_id" id="" >
-                    <% allGenres.forEach(genre => { %>
-                    <option value="<%= genre.id %>" <% if (Movie.genre_id == genre.id) { %><%= 'selected' %><% }; %>><%= genre.name %></option>
-                    <% }); %>
+                <select name="genre_id" id="">
+                    <% allGenres.forEach(genre=> { %>
+                        <option value="<%= genre.id %>" <% if (Movie.genre_id==genre.id) { %>
+                            <%= 'selected' %>
+                                <% }; %>><%= genre.name %>
+                        </option>
+                        <% }); %>
                 </select>
             </p>
             <small style="color: red; width: 100%;background-color: aliceblue;">
                 <%= locals.errors && errors.genre_id ? errors.genre_id.msg : null %>
             </small>
-            <a href="/genres/add" style="background-color: rgba(9, 248, 41, 0.336); border-radius: 5px;"><small>Agregar Genero +</small></a><br>
+            <a href="/genres/add" style="background-color: rgba(9, 248, 41, 0.336); border-radius: 5px;"><small>Agregar
+                    Genero +</small></a><br>
             <!-- required -->
             <label for="actors_id">Actors </label>
             <p>
-                <select name="actors_id" id="" multiple   style="height: 150px;">
+                <select name="actors_id" id="" multiple style="height: 150px;">
                     <option value="" disabled selected>- select Actor - </option>
-                    <% allActors.forEach(actor => { %>
-                    <option value="<%= actor.id %>" <% Movie.actores.forEach(Actor => { %>
-                     <% if (Actor.id == actor.id) { %><%= 'selected' %>
-                    <% }; %><% }); %> 
-                    <% if (locals.old) { %>
-                     <% if (Array.isArray(locals.old.actors_id) && locals.old.actors_id.includes(actor.id.toString())) { %>
-                        <%= 'selected' %>
-                    <% } else if (!Array.isArray(locals.old.actors_id) && locals.old.actors_id == actor.id) { %>
-                        <%= 'selected' %>
-                    <% } %>
-                    <% } %>
-                      ><%= actor.first_name+' '+actor.last_name %></option>
+                    <% allActors.forEach(actor=> { %>
+                        <option value="<%= actor.id %>" <% Movie.actores.forEach(Actor=> { %>
+                            <% if (Actor.id==actor.id) { %>
+                                <%= 'selected' %>
+                                    <% }; %>
+                                        <% }); %>
+                                            <% if (locals.old) { %>
+                                                <% if (Array.isArray(locals.old.actors_id) &&
+                                                    locals.old.actors_id.includes(actor.id.toString())) { %>
+                                                    <%= 'selected' %>
+                                                        <% } else if (!Array.isArray(locals.old.actors_id) &&
+                                                            locals.old.actors_id==actor.id) { %>
+                                                            <%= 'selected' %>
+                                                                <% } %>
+                                                                    <% } %>
+                                                                        ><%= actor.first_name+' '+actor.last_name %></option>
                     <% }) %> 
                 </select>
             </p>

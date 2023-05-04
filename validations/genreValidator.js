@@ -8,11 +8,6 @@ module.exports = [
             ignore: " "
         }).withMessage('Solo caracteres alfabéticos'),
     check('active')
-        .notEmpty().withMessage('Elegir una opcion').bail(),    
-    /* check('favorite_movie_id')
-        .notEmpty().withMessage('Debes elegir una categoría'),
-    check('actors_id')
-        .notEmpty().withMessage('Debes elegir al menos un actor'), */   /*
-    .isNumeric({ no_symbols: true }).withMessage('Ingresar solo numeros').bail()
-    */
+        .notEmpty().withMessage('Elegir una opcion').bail(),
+
 ]

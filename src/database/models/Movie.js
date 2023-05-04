@@ -34,20 +34,20 @@ module.exports = (sequelize, dataTypes) => {
         updatedAt: 'updated_at',
         deletedAt: false
     }
-    const Movie = sequelize.define(alias,cols,config);
+    const Movie = sequelize.define(alias, cols, config);
 
     //Aquí debes realizar lo necesario para crear las relaciones con los otros modelos (Genre - Actor)
 
-    Movie.associate = models=>{
-        Movie.belongsTo(models.Genre,{
+    Movie.associate = models => {
+        Movie.belongsTo(models.Genre, {
             as: "genero",
-            foreignKey : "genre_id"
+            foreignKey: "genre_id"
         })
-        Movie.belongsToMany(models.Actor,{
+        Movie.belongsToMany(models.Actor, {
             as: "actores",
-            through : "actor_movie",
-            foreignKey : "movie_id",
-            otherKey : "actor_id",
+            through: "actor_movie",
+            foreignKey: "movie_id",
+            otherKey: "actor_id",
             onDelete: 'CASCADE'
         })
     }

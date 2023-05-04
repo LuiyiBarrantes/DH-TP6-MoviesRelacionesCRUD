@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actores ordenados por rating</title>
     <link rel='stylesheet' href='/css/style.css' />
 </head>
+
 <body>
     <figure>
         <a href="/"><img src="/img/logo-DH.png" alt="Logo Digital House"></a>
@@ -17,10 +19,11 @@
 
     </p> <br>
     <ul>
-        <% for( let i = 0; i < actors.length; i++ ) { %>
-        <li>
-            <a href="/actors/detail/<%=actors[i].id%>"><%= actors[i].first_name+' '+actors[i].last_name %> </a> <br>
-            <%= 'RATING: ' + actors[i].rating %> 
+        <% for( let i=0; i < actors.length; i++ ) { %>
+            <li>
+                <a href="/actors/detail/<%=actors[i].id%>">
+                    <%= actors[i].first_name+' '+actors[i].last_name %> </a> <br>
+            <%= ' RATING: ' + actors[i].rating %> 
         </li>
         <% } %>
         

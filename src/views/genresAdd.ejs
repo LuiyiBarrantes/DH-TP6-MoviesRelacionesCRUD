@@ -23,25 +23,27 @@
                 <%= locals.errors && errors.name ? errors.name.msg : null %>
             </small> <br>
             <label for="active">Active </label>
-            <input type="radio" for="on" name="active" id="" value="1" <%= locals.old && old.active == '1' ? 'checked' : null %> %>>
+            <input type="radio" for="on" name="active" id="" value="1" <%=locals.old && old.active=='1' ? 'checked' :
+                null %> %>>
             <label for="on">Yes</label>
-            <input type="radio" for="off" name="active" id="" value="0" <%= locals.old && old.active == '0' ? 'checked' : null %>>
+            <input type="radio" for="off" name="active" id="" value="0" <%=locals.old && old.active=='0' ? 'checked' :
+                null %>>
             <label for="off">No</label>
             <p>
-            <!-- required -->
-            <small style="color: red; width: 100%; background-color: aliceblue">
-                <%= locals.errors && errors.active ? errors.active.msg : null %>
-            </small> <br>
-            
-            <br>
+                <!-- required -->
+                <small style="color: red; width: 100%; background-color: aliceblue">
+                    <%= locals.errors && errors.active ? errors.active.msg : null %>
+                </small> <br>
+
+                <br>
             <p class="botonera"> <button class="botonAgregar" type="submit">Agregar</button>
-            
+
             </p>
         </form>
         <br>
-        <a  class="botonera botonVolver centrado" href="/movies">Volver</a>
+        <a class="botonera botonVolver centrado" href="/movies">Volver</a>
     </section>
-    
+
 </body>
 
 </html>

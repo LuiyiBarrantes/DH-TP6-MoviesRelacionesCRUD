@@ -11,7 +11,7 @@
 
 <body>
     <figure>
-        <img src="/img/logo-DH.png" alt="Logo Digital House">
+        <a href="/"><img src="/img/logo-DH.png" alt="Logo Digital House"></a>
     </figure>
     <h1>LISTADO DE PELÍCULAS</h1>
     <br>
@@ -22,14 +22,16 @@
     </p>
     <br>
     <ul>
-        <% for( let i = 0; i < movies.length; i++ ) { %>
-        <li>
-            <a href="/movies/detail/<%= movies[i].id %>"><%= movies[i].title %></a>
-        </li>
-        <% } %>
+        <% for( let i=0; i < movies.length; i++ ) { %>
+            <li>
+                <a href="/movies/detail/<%= movies[i].id %>">
+                    <%= movies[i].title %>
+                </a>
+            </li>
+            <% } %>
 
     </ul>
-    
+
 </body>
 
 </html>

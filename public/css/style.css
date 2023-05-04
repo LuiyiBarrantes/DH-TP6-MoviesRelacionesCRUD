@@ -1,14 +1,15 @@
-*{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   list-style: none;
 }
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-image: url(../img/banner.jpg);
-  
+
 }
 
 a {
@@ -17,16 +18,19 @@ a {
   color: aliceblue;
   /*  background: rgba(255, 255, 255, 0.76) 200px
 */
-font-size: xx-large;
+  font-size: xx-large;
 }
-img{
+
+img {
   width: 100%;
 }
-figure{
+
+figure {
   width: 20%;
   background: rgb(255, 255, 255);
 }
-h1{
+
+h1 {
   text-align: center;
   /* background: rgba(255, 255, 255, 0.479); */
   width: fit-content;
@@ -35,7 +39,8 @@ h1{
   color: aliceblue;
   text-shadow: 0 0 20px black;
 }
-ul{
+
+ul {
   background: rgb(0 0 0 / 69%);
   text-align: center;
   font-weight: bold;
@@ -47,11 +52,13 @@ ul{
   color: white;
   font-size: x-large;
 }
-.botonera{
+
+.botonera {
   text-align: center;
   background: none;
 }
-p{
+
+p {
   /* background: rgba(255, 255, 255, 0.479); */
   text-align: center;
   font-size: x-large;
@@ -61,35 +68,42 @@ p{
   text-shadow: 0 0 10px black;
   color: aqua;
 }
-.botonAgregar , .botonModificar{
+
+.botonAgregar,
+.botonModificar {
   color: white;
   background-color: green;
   padding: 10px;
   border-radius: 10px;
 }
-.botonBorrar{
+
+.botonBorrar {
   color: white;
   background-color: red;
   padding: 10px;
   border-radius: 10px;
 }
-.botonVolver{
+
+.botonVolver {
   color: white;
   background-color: #00B7FF;
   padding: 10px;
   border-radius: 10px;
 }
-.formulario{
+
+.formulario {
   margin: auto;
   width: 300px;
   background: rgba(255, 255, 255, 0.479);
   border-radius: 5px;
   text-align: center;
 }
-.centrado{
+
+.centrado {
   margin: 40%;
 }
-.lista__actores{
+
+.lista__actores {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

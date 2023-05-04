@@ -10,7 +10,7 @@
 
 <body>
     <figure>
-        <img src="/img/logo-DH.png" alt="Logo Digital House">
+        <a href="/"><img src="/img/logo-DH.png" alt="Logo Digital House"></a>
     </figure>
     <h1 class="titulo">Agregar Película</h1>
     <br>
@@ -60,20 +60,23 @@
             <small style="color: red; width: 100%;background-color: aliceblue;">
                 <%= locals.errors && errors.genre_id ? errors.genre_id.msg : null %>
             </small>
-            <a href="/genres/add" style="background-color: rgba(6, 252, 26, 0.315); border-radius: 5px;"><small>Agregar Genero +</small></a> <br>
+            <a href="/genres/add" style="background-color: rgba(6, 252, 26, 0.315); border-radius: 5px;"><small>Agregar
+                    Genero +</small></a> <br>
             <label for="actors_id">Actors </label>
             <p>
                 <select name="actors_id" id="" multiple style="height: 150px;"><!-- required -->
                     <option value="" disabled selected>- select Actor - </option>
                     <% allActors.forEach(Actor=> { %>
                         <option value="<%= Actor.id %>" <% if (locals.old) { %>
-                         <% if (Array.isArray(locals.old.actors_id) && locals.old.actors_id.includes(Actor.id.toString())) { %>
-                            <%= 'selected' %>
-                         <% } else if (!Array.isArray(locals.old.actors_id) && locals.old.actors_id == Actor.id) { %>
-                            <%= 'selected' %>
-                        <% } %>
-                        <% } %>  >
-                            <%= Actor.first_name+' '+Actor.last_name %></option>
+                            <% if (Array.isArray(locals.old.actors_id) &&
+                                locals.old.actors_id.includes(Actor.id.toString())) { %>
+                                <%= 'selected' %>
+                                    <% } else if (!Array.isArray(locals.old.actors_id) &&
+                                        locals.old.actors_id==Actor.id) { %>
+                                        <%= 'selected' %>
+                                            <% } %>
+                                                <% } %> >
+                                                    <%= Actor.first_name+' '+Actor.last_name %></option>
                     <% }); %>
                 </select>
             </p>
