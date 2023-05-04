@@ -92,33 +92,41 @@ const actorsController = {
         }        
     },
     'edit': function (req, res) {
-        const movie = db.Movie.findByPk(req.params.id, {
-            include: ["genero", "actores"]
+        const actorToUpdate = db.Actor.findByPk(req.params.id, {
+            include: ["favorite_movie"]
         })
 
-        const allGenres = db.Genre.findAll()
+        const allMovies = db.Movie.findAll({
+            order: [
+                ['title', 'ASC']
+            ]
+        })
 
-        const allActors = db.Actor.findAll()
-
-        Promise.all([movie, allGenres, allActors])
-            .then(([movie, allGenres, allActors]) => {
-                // return res.send(movie)
-                // res.send(movie.release_date.toISOString())
-                //.split("T")[0] res.send([movie,allGenres])
-                return res.render('moviesEdit', {
-                    Movie: movie,
-                    allGenres,
-                    allActors
+        Promise.all([actorToUpdate, allMovies])
+            .then(([actorToUpdate, allMovies]) => {
+                // return res.send(actorToUpdate)
+                // res.send(actorToUpdate.release_date.toISOString())
+                //.split("T")[0] res.send([actorToUpdate,allMovies])
+                return res.render('actorsEdit', {
+                    actor: actorToUpdate,
+                    allMovies
                 })
             })
             .catch(error => console.log(error));
     },
     'update': function (req, res) {
+        const errors = validationResult(req);
         const { id } = req.params
+        const { first_name,last_name } = req.body;
+
         //return res.send(req.body)
-        db.Movie.update({
+        if (errors.isEmpty()) {
+            
+
+            db.Actor.update({
             ...req.body,
-            title: req.body.title.trim()
+            first_name: first_name.trim(),
+            last_name: last_name.trim()
         }, {
             where: {
                 id: id
@@ -127,21 +135,47 @@ const actorsController = {
             .then(result => {
                 console.log(result);
 
-                return res.redirect('/movies/detail/' + id)
+                return res.redirect('/actors')
             })
             .catch(error => console.log(error))
+        } else {
+            const actorToUpdate = db.Actor.findByPk(req.params.id, {
+                include: ["favorite_movie"]
+            })
+    
+            const allMovies = db.Movie.findAll({
+                order: [
+                    ['title', 'ASC']
+                ]
+            })
+    
+            Promise.all([actorToUpdate, allMovies])
+                .then(([actorToUpdate, allMovies]) => {
+                    // return res.send(actorToUpdate)
+                    // res.send(actorToUpdate.release_date.toISOString())
+                    //.split("T")[0] res.send([actorToUpdate,allMovies])
+                    return res.render('actorsEdit', {
+                        actor: actorToUpdate,
+                        allMovies,
+                        errors: errors.mapped(),
+                        old: req.body,
+                    })
+                })
+                .catch(error => console.log(error));
+        }
+        
     },
     'delete': function (req, res) {
         const { id } = req.params
-        /* const movie =  */db.Movie.findByPk(id)
+        /* const movie =  */db.Actor.findByPk(id)
 
             /* const allGenres = db.Genre.findAll()
     
             Promise.all([movie,allGenres]) */
-            .then((/* [movie,allGenres] */Movie) => {
+            .then((/* [movie,allGenres] */actor) => {
                 // return res.send(Movie)
                 // .split("T")[0] res.send([movie,allGenres])
-                return res.render('moviesDelete', { Movie } /* {Movie:movie,                allGenres} */)
+                return res.render('actorsDelete', { actor } /* {Movie:movie,                allGenres} */)
             })
             .catch(error => console.log(error));
     },

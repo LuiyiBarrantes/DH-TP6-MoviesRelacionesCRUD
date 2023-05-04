@@ -10,7 +10,7 @@
 
 <body>
     <figure>
-        <img src="/img/logo-DH.png" alt="Logo Digital House">
+        <a href="/"><img src="/img/logo-DH.png" alt="Logo Digital House"></a>
       </figure>
     <h1 class="titulo">Película Editada:  <%= Movie.title %></h1>
     <section class="formulario">
@@ -37,6 +37,7 @@
             <p><input type="date" name="release_date" id="" value="<%= Movie.release_date.toISOString().slice(0, 10)   %>" <%# .toISOString().split("T")[0] %> ></p>
             <small style="color: red; width: 100%;background-color: aliceblue;">
                 <%= locals.errors && errors.release_date ? errors.release_date.msg : null %>
+            </small> <br>
                 <!-- required -->
             <label for="length">Length </label>
             <p><input type="number" name="length" id="" value="<%= Movie.length %>" ></p>
@@ -54,7 +55,8 @@
             </p>
             <small style="color: red; width: 100%;background-color: aliceblue;">
                 <%= locals.errors && errors.genre_id ? errors.genre_id.msg : null %>
-            </small> <br>
+            </small>
+            <a href="/genres/add" style="background-color: rgba(9, 248, 41, 0.336); border-radius: 5px;"><small>Agregar Genero +</small></a><br>
             <!-- required -->
             <label for="actors_id">Actors </label>
             <p>
@@ -75,8 +77,9 @@
                     <% }) %> 
                 </select>
             </p>
-            <small style="color: red; width: 100%;background-color: aliceblue;"><%= locals.errors && errors.actors_id ?  errors.actors_id.msg : null %></small> <br>
+            <small style="color: red; width: 100%;background-color: aliceblue;"><%= locals.errors && errors.actors_id ?  errors.actors_id.msg : null %></small> <a href="/actors/add" style="background-color: rgba(3, 248, 44, 0.267); border-radius: 5px;"><small>Agregar Actor +</small></a><br>
             <!-- required -->
+            
            
             <br>
             <p> <button class="botonAgregar" type="submit">Actualizar</button>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title class="titulo">Editar Actor</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <figure>
+        <a href="/"><img src="/img/logo-DH.png" alt="Logo Digital House"></a>
+    </figure>
+    <h1 class="titulo">Actor Editado: <%= actor.first_name+' '+actor.last_name %></h1>
+    <section class="formulario">
+        <form action="/actors/update/<%= actor.id %>" method="POST">
+            <label for="first_name">First Name </label>
+            <p><input type="text" name="first_name" id="" value="<% if (locals.old) { %><%= locals.old.first_name   %><% } else { %><%= actor.first_name %><% } %>" ></p>
+            <small style="color: red; width: 100%; background-color: aliceblue">
+                <%= locals.errors && errors.first_name ? errors.first_name.msg : null %>
+            </small> <br>
+            <label for="last_name">Last Name </label>
+            <p><input type="text" name="last_name" id="" value="<% if (locals.old) { %><%= locals.old.last_name   %><% } else { %><%= actor.last_name %><% } %>" ></p>
+            <small style="color: red; width: 100%; background-color: aliceblue">
+                <%= locals.errors && errors.last_name ? errors.last_name.msg : null %>
+            </small> <br>
+            <!-- required -->
+            <label for="rating">Rating </label>
+            <p><input type="number" name="rating" id="" value="<% if (locals.old) { %><%= locals.old.rating   %><% } else { %><%= actor.rating %><% } %>" ></p>
+            <small style="color: red; width: 100%;background-color: aliceblue;">
+                <%= locals.errors && errors.rating ? errors.rating.msg : null %>
+            </small> <br>
+            <!-- required -->
+            <label for="favorite_movie_id">Favorite Movie </label>
+            <p>
+                <select name="favorite_movie_id" id="" style="width: 200px;">    <option value="" disabled 
+                    <% if (!actor.favorite_movie_id) { %>
+                     selected
+                    <% } %>
+                     >- select movie - </option>
+                    <% allMovies.forEach(movie => { %>
+                    <option value="<%= movie.id %>" <% if (actor.favorite_movie_id == movie.id) { %><%= ' selected' %>
+            <% }; %>><%= movie.title %>
+                    </option>
+                    <% }); %>
+                        </select>
+                        </p>
+                        <a href="/movies/add" style="background-color: darkgray; border-radius: 5px;"><small>Agregar Pelicula +</small></a><br>
+                        <!-- <small style="color: red; width: 100%;background-color: aliceblue;">
+                <%= locals.errors && errors.favorite_movie_id ? errors.favorite_movie_id.msg : null %>
+            </small> <br> -->
+                        <!-- required -->
+                        <br>
+                        <p> <button class="botonAgregar" type="submit">Actualizar</button>
+                        </p>
+                        <a href="/actors/detail/<%= actor.id %>"><button class="botonBorrar">Cancelar</button></a>
+                        <a href="/actors"><button class="botonVolver">Listado de Actores</button></a>
+                        </form>
+                        </section>
+</body>
+
+</html>

@@ -10,7 +10,7 @@ router.get('/actors/detail/:id', actorsController.detail);
 router.get('/actors/add', actorsController.add);
 router.post('/actors/create', actorValidator, actorsController.create);
 router.get('/actors/edit/:id', actorsController.edit);
-router.post('/actors/update/:id', actorsController.update);
+router.post('/actors/update/:id', actorValidator, actorsController.update);
 router.get('/actors/delete/:id', actorsController.delete);
 router.post('/actors/delete/:id', actorsController.destroy);
 

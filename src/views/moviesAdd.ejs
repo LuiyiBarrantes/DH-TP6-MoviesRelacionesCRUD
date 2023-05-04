@@ -59,7 +59,8 @@
             </p>
             <small style="color: red; width: 100%;background-color: aliceblue;">
                 <%= locals.errors && errors.genre_id ? errors.genre_id.msg : null %>
-            </small> <br>
+            </small>
+            <a href="/genres/add" style="background-color: rgba(6, 252, 26, 0.315); border-radius: 5px;"><small>Agregar Genero +</small></a> <br>
             <label for="actors_id">Actors </label>
             <p>
                 <select name="actors_id" id="" multiple style="height: 150px;"><!-- required -->
@@ -76,7 +77,8 @@
                     <% }); %>
                 </select>
             </p>
-            <small style="color: red; width: 100%;background-color: aliceblue;"><%= locals.errors && errors.actors_id ?  errors.actors_id.msg : null %></small> <br>
+            <small style="color: red; width: 100%;background-color: aliceblue;"><%= locals.errors && errors.actors_id ?  errors.actors_id.msg : null %></small> 
+            <a href="/actors/add" style="background-color: rgba(73, 177, 90, 0.925); border-radius: 5px;"><small>Agregar Actor +</small></a><br>
             <br>
             <p class="botonera"> <button class="botonAgregar" type="submit">Agregar</button>
             
