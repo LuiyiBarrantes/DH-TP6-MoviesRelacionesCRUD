@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genre add</title>
+    <link rel='stylesheet' href='/css/style.css' />
+</head>
+
+<body>
+    <figure>
+        <a href="/"><img src="/img/logo-DH.png" alt="Logo Digital House"></a>
+    </figure>
+    <h1 class="titulo">Agregar Genero</h1>
+    <br>
+    <section>
+        <form action="/genres/create" method="POST" class="formulario">
+            <label for="name"> Name </label>
+            <p><input type="text" name="name" id="" value="<%= locals.old && old.name ? old.name : null %>"></p>
+            <!-- required -->
+            <small style="color: red; width: 100%; background-color: aliceblue">
+                <%= locals.errors && errors.name ? errors.name.msg : null %>
+            </small> <br>
+            <label for="active">Active </label>
+            <input type="radio" for="on" name="active" id="" value="1" <%= locals.old && old.active == '1' ? 'checked' : null %> %>>
+            <label for="on">Yes</label>
+            <input type="radio" for="off" name="active" id="" value="0" <%= locals.old && old.active == '0' ? 'checked' : null %>>
+            <label for="off">No</label>
+            <p>
+            <!-- required -->
+            <small style="color: red; width: 100%; background-color: aliceblue">
+                <%= locals.errors && errors.active ? errors.active.msg : null %>
+            </small> <br>
+            
+            <br>
+            <p class="botonera"> <button class="botonAgregar" type="submit">Agregar</button>
+            
+            </p>
+        </form>
+        <br>
+        <a  class="botonera botonVolver centrado" href="/movies">Volver</a>
+    </section>
+    
+</body>
+
+</html>

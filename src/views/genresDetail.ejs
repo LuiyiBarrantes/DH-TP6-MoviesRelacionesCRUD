@@ -16,19 +16,18 @@
     <p>NAME: <%= genre.name %> </p>
     <p>RANKIG: <%= genre.ranking %> </p>
     <p>MOVIES: <% if (genre.peliculas.length!=0) { %>
-        <% genre.peliculas.forEach(pelicula => { %>
+        <ul><% genre.peliculas.forEach(pelicula => { %>
          <a href="/movies/detail/<%= pelicula.id %>"><li><%=pelicula.title %></li></a>
        
         <% }) %>
         <% } else { %>
          Sin peliculas agregadas
-       <% } %>  </p>
+       <% } %> </ul> </p>
 
        <br>   
-       <section>
-           <!--Aquí debe colocar los botones de Modificar - Borrar y Listado de Películas-->
-           <!-- <a href="/movies/edit/<%# movie.id %>" class="botonModificar">Modificar</a>
-           <a href="/movies/delete/<%# movie.id %>" class="botonBorrar">Borrar</a> -->
+       <section class="botonera">
+        <a href="/genres/edit/<%= genre.id %>" class="botonModificar">Modificar</a>
+        <a href="/genres/delete/<%= genre.id %>" class="botonBorrar">Borrar</a>
            <a href="/genres" class="botonVolver">Volver</a>
            
        </section>
