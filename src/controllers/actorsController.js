@@ -167,25 +167,23 @@ const actorsController = {
     },
     'delete': function (req, res) {
         const { id } = req.params
-        /* const movie =  */db.Actor.findByPk(id)
+        db.Actor.findByPk(id)
 
-            /* const allGenres = db.Genre.findAll()
-    
-            Promise.all([movie,allGenres]) */
-            .then((/* [movie,allGenres] */actor) => {
+            
+            .then((actor) => {
                 // return res.send(Movie)
                 // .split("T")[0] res.send([movie,allGenres])
-                return res.render('actorsDelete', { actor } /* {Movie:movie,                allGenres} */)
+                return res.render('actorsDelete', { actor } )
             })
             .catch(error => console.log(error));
     },
     'destroy': function (req, res) {
         const { id } = req.params
-        db.Movie.destroy({
+        db.Actor.destroy({
             where: { id: id }
         })
             .then(() => {
-                return res.redirect('/movies')
+                return res.redirect('/actors')
             })
             .catch(error => console.log(error));
     }
