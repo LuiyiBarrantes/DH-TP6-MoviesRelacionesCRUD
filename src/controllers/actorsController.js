@@ -2,6 +2,7 @@ const path = require('path');
 const db = require('../database/models');
 const sequelize = db.sequelize;
 const { Op } = require("sequelize");
+const { validationResult } = require('express-validator');
 
 const actorsController = {
     'list': (req, res) => {
@@ -57,18 +58,38 @@ const actorsController = {
             .catch(error => console.log(error));
     },
     'create': function (req, res) {
+        const errors = validationResult(req);
+        const { first_name,last_name } = req.body;
 
-        const { title } = req.body;
-
-        db.Movie.create({
+        if (errors.isEmpty()) {
+            db.Actor.create({
             ...req.body,
-            title: title.trim()
+            first_name: first_name.trim(),
+            last_name: last_name.trim()
+
         })
-            .then(newMovie => {
-                console.log(newMovie);
-                return res.redirect('/movies')
+            .then(newActor => {
+                console.log(newActor);
+                return res.redirect('/actors')
             })
             .catch(error => console.log(error));
+        } else {
+            db.Movie.findAll({
+                order: [
+                    ['title', 'ASC']
+                ]
+            })        
+                .then((movies) => {
+                    // res.send(movie.release_date.toISOString())
+                    //.split("T")[0] res.send([movie,allGenres])
+                    return res.render('actorsAdd', {
+                        movies,
+                        errors: errors.mapped(),
+                        old: req.body,
+                    })
+                })
+                .catch(error => console.log(error));
+        }        
     },
     'edit': function (req, res) {
         const movie = db.Movie.findByPk(req.params.id, {
